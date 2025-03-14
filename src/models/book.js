@@ -1,8 +1,12 @@
 import Author from "./author.js";
 
 class Book {
-    constructor(title, authors, summary, subjects, cover) {
 
+    #authors = [];
+
+    constructor(id, title, authors, summary, subjects, cover) {
+
+        this.id = id;
         this.title = title;
         this.authors = authors;
         this.summary = summary;
@@ -17,4 +21,21 @@ class Book {
         return title1.localeCompare(title2);
     }
 
+
+    /**
+     * @param {any[]} arrayAuthors
+     */
+    set authors(arrayAuthors) {
+        
+        for (const author of arrayAuthors) {
+            this.#authors.push(author.name, author.birth_year, author.death_year);
+        }
+    }
+
+    get authors() {
+        return this.#authors;
+    }
+
 }
+
+export default Book;

@@ -1,9 +1,18 @@
 // import BookService from "";
 import BookService from "./service/book-service.js";
+import HtmlConstructor from "./service/html-service.js";
 
 const service = new BookService();
 
-service.getBooksData();
+function getData(){
+    service.getBooksData().then(books => books.forEach(book => render(book)));
+}
+
+function render(dataToBeRendered) {
+    root.appendChild(HtmlConstructor.createBookHtml(dataToBeRendered))
+  }
+  
+  getData()
 
 //1) fate la fetch del file json e loggate l'array di libri                   DONE
 //2) create la classe libro e la classe autore
