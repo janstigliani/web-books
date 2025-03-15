@@ -3,7 +3,7 @@ import Book from "../models/book.js"
 export default class BookService {
   constructor() {}
 
-  #dataUrl = '/assets/book.json'
+  #dataUrl = 'web-book/assets/book.json'
 
   // getRowData(){
   //   return fetch(this.#dataUrl)
