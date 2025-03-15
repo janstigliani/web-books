@@ -1,33 +1,43 @@
-import Book from "../models/book.js";
+import Book from "../models/book.js"
 
-class BookService {
-    constructor() {
-        
-    }
+export default class BookService {
+  constructor() {}
 
-    getBooksData() {
+  #dataUrl = '/assets/book.json'
 
-       return fetch(`/assets/books.json`).then(response => response.json())
-                                         .then(data => this.fromRawDataToBooks(data))
-                                         .catch(error => console.log(error));
+  // getRowData(){
+  //   return fetch(this.#dataUrl)
+  //   .then(res => res.json())
+  //   .then(data => data)
+  //   .catch(error => console.error(error))
+  // }
 
-    }
+  /**
+   * 
+   * @returns {Promise<Book[]>}
+   */
+  fetchBooksData() {
+    return fetch(this.#dataUrl)
+    .then(res => res.json())
+    .then(data => {
+      return  data.map(entry => this.convertDataToBook(entry))
+    })
+    .catch(error => console.error(error))
+  }
 
-    fromRawDataToBooks(booksData) {
-        const book = [];
+  convertDataToBook(dataEntry) {
+    return new Book(
+      dataEntry.id, dataEntry.title, dataEntry.authors, dataEntry.summaries[0] ?? 'summary not available',
+      dataEntry.subjects, dataEntry.formats['image/jpeg']
+    )
+  }
 
-        for (const bookObj of booksData) {
-            let subjTrim = [];
-            if (bookObj.subjects.length>4) {
-                subjTrim = bookObj.subjects.slice(0,4);
-            } else {
-                subjTrim = bookObj.subjects;
-            }
+  fetchBookFromId(searchId){
+    return this.fetchBooksData()
+    .then(booksArray => booksArray.find(book => book.id === searchId))
+  }
 
-            book.push(new Book(bookObj.id, bookObj.title,bookObj.authors, bookObj.summaries[0], subjTrim, bookObj.formats["image/jpeg"]))
-        }
-        return book;
-    }
+
+
+
 }
-
-export default BookService;
