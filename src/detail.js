@@ -1,12 +1,10 @@
-import BookService from "./services/book-service.js";
-import HtmlConstructor from "./services/html-service.js";
+import BookService from "./service/book-service.js";
+import HtmlConstructor from "./service/html-service.js";
 
 
 const bookService = new BookService()
 const urlParams = new URLSearchParams(window.location.search);
 const root = document.getElementById('root')
-
-
 
 function getBook() {
   const targetBookId = parseInt(urlParams.get('id'))
