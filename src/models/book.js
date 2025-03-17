@@ -28,7 +28,11 @@ class Book {
     set authors(arrayAuthors) {
         
         for (const author of arrayAuthors) {
-            this.#authors.push(author.name, author.birth_year, author.death_year);
+            if (!!arrayAuthors) {
+                this.#authors.push(author.name, author.birth_year, author.death_year);
+            } else {
+                this.#authors = [];
+            }
         }
     }
 
