@@ -36,8 +36,4 @@ export default class BookService {
     return this.fetchBooksData()
     .then(booksArray => booksArray.find(book => book.id === searchId))
   }
-
-
-
-
 }
