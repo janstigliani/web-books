@@ -11,7 +11,7 @@ export default class HtmlConstructor {
   static createBookHtml(bookInstance){
 
     const bookContainer = HtmlConstructor.#crateElement('a', 'book-card')
-    bookContainer.href = `https://janstigliani.github.io/web-book/detail.html?id=${bookInstance.id}`
+    bookContainer.href = `https://janstigliani.github.io/web-books/detail.html?id=${bookInstance.id}`
 
     const coverContainer = HtmlConstructor.#crateElement('div', 'cover-container')
 
